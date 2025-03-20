@@ -44,7 +44,12 @@ class OT_Generate_Shelf(bpy.types.Operator):
             new_obj.data = random_item.data.copy()
             new_obj.location = obj.location
             generated_collection.objects.link(new_obj)
-            
+
+            # Add Array modifier to the new object
+            array_modifier = new_obj.modifiers.new(name="Array", type='ARRAY')
+            array_modifier.relative_offset_displace = (0, 1.1, 0.0)  # 1.2x szerokości obiektu
+            array_modifier.count = 2  # Number of copies
+
         return {"FINISHED"}
 
 classes = [
