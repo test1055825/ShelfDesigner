@@ -13,6 +13,7 @@ class OT_Render_Shelf(bpy.types.Operator):
 
     def execute(self, context):
         for i in range(bpy.context.scene.how_much_renders):
+            bpy.ops.object.generate_shelf()
             bpy.ops.render.render(use_viewport=True)
             bpy.data.images['Render Result'].save_render(filepath=f"{bpy.data.scenes['Scene'].render.filepath}/{i}.png")
         return {"FINISHED"}
@@ -47,8 +48,8 @@ class OT_Generate_Shelf(bpy.types.Operator):
 
             # Add Array modifier to the new object
             array_modifier = new_obj.modifiers.new(name="Array", type='ARRAY')
-            array_modifier.relative_offset_displace = (0, 1.1, 0.0)  # 1.2x szerokości obiektu
-            array_modifier.count = 2  # Number of copies
+            array_modifier.relative_offset_displace = (0, 1.1, 0.0)  #offset between copies        
+            array_modifier.count = 4  # Number of copies
 
         return {"FINISHED"}
 
